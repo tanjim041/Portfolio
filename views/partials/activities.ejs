@@ -1,0 +1,33 @@
+<section id="activities" class="py-24 bg-secondary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="font-poppins text-3xl md:text-5xl font-bold text-text-main mb-4">Extracurricular <span class="text-accent-secondary">Activities</span></h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-accent-secondary to-transparent mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% data.activities.forEach((activity, index) => { %>
+                <div class="bg-card border border-border rounded-xl overflow-hidden group hover:border-accent-secondary/50 transition-all duration-300" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                    
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-background/60 group-hover:bg-background/20 transition-colors z-10 duration-300"></div>
+                        <img src="<%= activity.image %>" alt="<%= activity.title %>" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop'">
+                        
+                        <div class="absolute bottom-4 left-4 z-20">
+                            <h3 class="font-poppins text-lg font-bold text-text-main group-hover:text-accent-secondary transition-colors"><%= activity.title %></h3>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5">
+                        <p class="text-text-muted text-sm leading-relaxed">
+                            <%= activity.description %>
+                        </p>
+                    </div>
+                    
+                </div>
+            <% }) %>
+        </div>
+
+    </div>
+</section>

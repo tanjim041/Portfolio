@@ -1,0 +1,34 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Production-Quality Personal Portfolio Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "concurrently \"npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch\" \"nodemon server.js\"",
+    "build": "npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css --minify"
+  },
+  "keywords": [
+    "portfolio",
+    "developer",
+    "nodejs",
+    "express"
+  ],
+  "author": "Md. Tanjimul Islam",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.13"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.0",
+    "tailwindcss": "^3.4.3"
+  }
+}

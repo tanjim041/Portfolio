@@ -1,0 +1,64 @@
+<section id="projects" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="font-poppins text-3xl md:text-5xl font-bold text-text-main mb-4">Featured <span class="text-accent-primary">Projects</span></h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-accent-primary to-transparent mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% data.projects.forEach((project, index) => { %>
+                <div class="bg-card border border-border rounded-2xl overflow-hidden flex flex-col group hover:-translate-y-2 hover:border-accent-primary/50 transition-all duration-300" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                    
+                    <!-- Project Image -->
+                    <div class="h-56 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-background/50 group-hover:bg-transparent transition-colors z-10 duration-300"></div>
+                        <img src="<%= project.image %>" alt="<%= project.title %>" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop'">
+                        
+                        <!-- Status Badge -->
+                        <div class="absolute top-4 right-4 z-20">
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-background/80 backdrop-blur border border-border text-text-main">
+                                <%= project.status %>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Project Content -->
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-accent-primary text-xs font-semibold tracking-wider uppercase"><%= project.date %></span>
+                        </div>
+                        
+                        <h3 class="font-poppins text-xl font-bold text-text-main mb-3 group-hover:text-accent-primary transition-colors">
+                            <%= project.title %>
+                        </h3>
+                        
+                        <p class="text-text-muted text-sm mb-6 flex-1">
+                            <%= project.description %>
+                        </p>
+                        
+                        <!-- Tech Stack Badges -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <% project.techStack.forEach(tech => { %>
+                                <span class="px-2 py-1 text-xs font-medium rounded bg-secondary text-text-muted border border-border">
+                                    <%= tech %>
+                                </span>
+                            <% }) %>
+                        </div>
+                        
+                        <!-- Action Links -->
+                        <div class="flex items-center gap-4 mt-auto pt-4 border-t border-border/50">
+                            <a href="<%= project.githubLink %>" target="_blank" class="flex flex-1 items-center justify-center gap-2 py-2 px-4 bg-secondary hover:bg-white hover:text-black rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="github" class="w-4 h-4"></i> Code
+                            </a>
+                            <a href="<%= project.liveLink %>" target="_blank" class="flex flex-1 items-center justify-center gap-2 py-2 px-4 bg-accent-primary/10 text-accent-primary hover:bg-accent-primary hover:text-background rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="external-link" class="w-4 h-4"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+
+    </div>
+</section>

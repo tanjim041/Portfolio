@@ -1,0 +1,140 @@
+{
+  "personal": {
+    "name": "Md. Tanjimul Islam",
+    "subtitle": "Computer Science & Engineering Student",
+    "titles": [
+      "Problem Solver",
+      "Programmer",
+      "Gamer",
+      "Explorer",
+      "Competitive Programmer",
+      "Creative Thinker"
+    ],
+    "about": "I am Md. Tanjimul Islam, a Computer Science & Engineering student at Ahsanullah University of Science and Technology (AUST). I am passionate about software development, competitive programming, problem solving, and learning modern technologies. I enjoy exploring new places, playing games, solving coding challenges, and continuously improving my technical skills. I believe in teamwork, creativity, discipline, and lifelong learning.",
+    "university": "AUST",
+    "department": "CSE",
+    "location": "Dhaka, Bangladesh",
+    "email": "islamtanjim316@gmail.com",
+    "phone": "01571270640",
+    "interests": "Coding, Gaming, Traveling"
+  },
+  "education": [
+    {
+      "institution": "Ahsanullah University of Science and Technology",
+      "degree": "BSc in Computer Science & Engineering",
+      "score": "CGPA: 3.80",
+      "duration": "2018–2022",
+      "image": "/images/aust.jpg",
+      "description": "Learned advanced concepts in software engineering, algorithms, and system design while participating in programming contests and various technical clubs."
+    },
+    {
+      "institution": "Adamjee Cantonment College",
+      "degree": "HSC",
+      "score": "GPA: 5.00",
+      "duration": "2016–2018",
+      "image": "/images/adamjee-college.jpg",
+      "description": "Excelled in science subjects, participating in extracurricular activities and building a strong foundation in mathematics and physics."
+    },
+    {
+      "institution": "Adamjee Cantonment Public School",
+      "degree": "SSC",
+      "score": "GPA: 5.00",
+      "duration": "2006–2016",
+      "image": "/images/adamjee-school.jpg",
+      "description": "Completed secondary education with excellent grades, active participation in debate and science fairs."
+    }
+  ],
+  "skills": {
+    "hard": [
+      "C",
+      "C++",
+      "Data Structures",
+      "Algorithms",
+      "Problem Solving",
+      "Object-Oriented Programming",
+      "Git",
+      "GitHub"
+    ],
+    "soft": [
+      "Adaptability",
+      "Creativity",
+      "Teamwork",
+      "Leadership",
+      "Time Management",
+      "Critical Thinking",
+      "Communication",
+      "Fast Learner"
+    ]
+  },
+  "projects": [
+    {
+      "title": "Portfolio Website",
+      "image": "/images/project-portfolio.jpg",
+      "description": "A modern, premium, fully responsive personal portfolio website.",
+      "techStack": ["Node.js", "Express", "EJS", "Tailwind CSS"],
+      "githubLink": "https://github.com",
+      "liveLink": "#",
+      "status": "Completed",
+      "date": "Oct 2023"
+    },
+    {
+      "title": "E-Commerce API",
+      "image": "/images/project-ecommerce.jpg",
+      "description": "A RESTful API built for a scalable e-commerce platform with robust authentication.",
+      "techStack": ["Node.js", "Express", "MongoDB", "JWT"],
+      "githubLink": "https://github.com",
+      "liveLink": "#",
+      "status": "In Progress",
+      "date": "Nov 2023"
+    },
+    {
+      "title": "Algorithm Visualizer",
+      "image": "/images/project-algo.jpg",
+      "description": "A web application that visualizes classic sorting and pathfinding algorithms.",
+      "techStack": ["React", "CSS", "Vite"],
+      "githubLink": "https://github.com",
+      "liveLink": "#",
+      "status": "Completed",
+      "date": "Aug 2023"
+    }
+  ],
+  "activities": [
+    {
+      "title": "Programming Contests",
+      "image": "/images/activity-cp.jpg",
+      "description": "Regularly participate in codeforces and regional programming contests."
+    },
+    {
+      "title": "University Clubs",
+      "image": "/images/activity-club.jpg",
+      "description": "Active member of the AUST CSE Society, organizing workshops and tech talks."
+    },
+    {
+      "title": "Hackathons",
+      "image": "/images/activity-hackathon.jpg",
+      "description": "Participated in national level hackathons building innovative solutions under 24 hours."
+    }
+  ],
+  "socials": [
+    {
+      "platform": "Facebook",
+      "link": "https://www.facebook.com/tanjim041",
+      "icon": "facebook"
+    },
+    {
+      "platform": "LinkedIn",
+      "link": "https://linkedin.com",
+      "icon": "linkedin"
+    },
+    {
+      "platform": "GitHub",
+      "link": "https://github.com/tanjim041",
+      "icon": "github"
+    }
+  ],
+  "contact": {
+    "address": "Mirpur-14\nDhaka-1206\nBangladesh",
+    "phone": "01571270640",
+    "email": "islamtanjim316@gmail.com"
+  }
+}
