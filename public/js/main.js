@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formMessage.classList.add('hidden');
             
             const formData = {
+                access_key: document.getElementById('access_key').value,
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 subject: document.getElementById('subject').value,
@@ -142,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             
             try {
-                const response = await fetch('/contact', {
+                const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)

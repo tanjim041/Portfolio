@@ -4,9 +4,8 @@
   "description": "Production-Quality Personal Portfolio Website",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "concurrently \"npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch\" \"nodemon server.js\"",
-    "build": "npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css --minify"
+    "build": "node build.js && npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css --minify",
+    "dev": "concurrently \"npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch\" \"node build.js\""
   },
   "keywords": [
     "portfolio",
