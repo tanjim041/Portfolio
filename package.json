@@ -1,33 +1,40 @@
 {
   "name": "portfolio",
-  "version": "1.0.0",
-  "description": "Production-Quality Personal Portfolio Website",
-  "main": "server.js",
-  "scripts": {
-    "build": "node build.js && npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css --minify",
-    "dev": "concurrently \"npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch\" \"node build.js\""
-  },
-  "keywords": [
-    "portfolio",
-    "developer",
-    "nodejs",
-    "express"
-  ],
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Production-Quality Personal Portfolio Website — React + Vite",
   "author": "Md. Tanjimul Islam",
   "license": "ISC",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
   "dependencies": {
-    "compression": "^1.7.4",
-    "dotenv": "^16.4.5",
-    "ejs": "^3.1.9",
-    "express": "^4.19.2",
-    "express-validator": "^7.0.1",
-    "helmet": "^7.1.0",
-    "morgan": "^1.10.0",
-    "nodemailer": "^6.9.13"
+    "framer-motion": "^12.12.1",
+    "lucide-react": "^0.511.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.56.4",
+    "react-icons": "^5.5.0",
+    "tsparticles-slim": "^2.12.0",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.8.1"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "nodemon": "^3.1.0",
-    "tailwindcss": "^3.4.3"
+    "@eslint/js": "^9.28.0",
+    "@tailwindcss/vite": "^4.1.8",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react": "^4.5.2",
+    "eslint": "^9.28.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.1.0",
+    "prettier": "^3.5.3",
+    "tailwindcss": "^4.1.8",
+    "vite": "^6.3.5"
   }
 }

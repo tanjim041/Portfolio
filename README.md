@@ -1,84 +1,100 @@
-# Tanjimul Islam - Developer Portfolio
+# Tanjimul Islam — Developer Portfolio
 
-![GitHub Pages](https://img.shields.io/badge/Deployed-GitHub%20Pages-success?style=for-the-badge&logo=github)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vercel](https://img.shields.io/badge/Deployed-Vercel-000?style=for-the-badge&logo=vercel&logoColor=white)
 
 ## About
 
-I built this portfolio to showcase my software projects, technical skills, and academic background in one place. I wanted a space to experiment with CSS frameworks and static site generation, creating a simple but effective website that I can maintain and update easily as I gain more experience.
+A modern, production-quality personal portfolio built with React 19, Vite, and Tailwind CSS v4. Designed to showcase software projects, technical skills, and academic background with a premium dark-themed UI, smooth animations, and full responsiveness.
 
 ## Live Demo
 
-**Portfolio Website:**  
-[https://tanjim041.github.io/Portfolio/](https://tanjim041.github.io/Portfolio/)
+**Portfolio Website:**
+[https://tanjim041.vercel.app](https://tanjim041.vercel.app)
 
-**Repository:**  
+**Repository:**
 [https://github.com/tanjim041/Portfolio](https://github.com/tanjim041/Portfolio)
-
-## Preview
-
-*(Add screenshots here)*
 
 ## Features
 
-- Responsive layout
-- Dark theme
-- Dynamic portfolio data loaded from JSON
-- Scroll animations and typing effect
-- Interactive particle background
-- Education timeline
-- Skills section
-- Project showcase with tags and links
-- Working static contact form
-- Embedded CV viewer
+- ⚡ Lightning-fast build with Vite
+- ⚛️ React 19 with functional components and hooks
+- 🎨 Tailwind CSS v4 with custom dark theme
+- 🎭 Framer Motion scroll and entrance animations
+- ✨ Interactive particle background (tsparticles)
+- ⌨️ Custom typing animation effect
+- 📱 Fully responsive (mobile, tablet, desktop)
+- 📊 Data-driven — all content lives in a single JS file
+- 📝 Contact form with validation (React Hook Form + Web3Forms)
+- 🔍 SEO optimized (meta tags, Open Graph, sitemap)
+- ♿ Accessible (ARIA labels, semantic HTML, keyboard navigation)
+- 🚀 One-click Vercel deployment
 
 ## Technology Stack
 
-**Frontend**
-- HTML5
-- Tailwind CSS
-- JavaScript (ES6+)
-
-**Libraries**
-- AOS (Animate on Scroll)
-- Particles.js
-- Lucide Icons
-
-**Data & Hosting**
-- JSON (for portfolio content)
-- GitHub Pages
-- Web3Forms (for the contact form)
+| Category       | Technologies                                        |
+| -------------- | --------------------------------------------------- |
+| **Framework**  | React 19, Vite                                      |
+| **Styling**    | Tailwind CSS v4                                     |
+| **Animations** | Framer Motion, tsparticles                          |
+| **Icons**      | Lucide React, React Icons                           |
+| **Forms**      | React Hook Form, Web3Forms API                      |
+| **Linting**    | ESLint, Prettier                                    |
+| **Deployment** | Vercel                                              |
 
 ## Folder Structure
 
 ```text
 Portfolio/
-├── data/
-│   └── portfolio.json       
 ├── public/
-│   ├── css/
-│   │   ├── input.css        
-│   │   └── style.css        
-│   ├── js/
-│   │   └── main.js          
-│   ├── images/              
-│   └── cv/                  
-├── views/
-│   ├── index.ejs            
-│   └── partials/            
-├── index.html               
-├── package.json             
-├── tailwind.config.js       
-├── build.js                 
-├── updatePaths.js           
-└── README.md                
+│   ├── images/              # Portfolio images
+│   ├── cv/                  # CV PDF file
+│   ├── icons/               # Custom icons
+│   ├── favicon.svg          # Site favicon
+│   ├── robots.txt           # SEO robots file
+│   └── sitemap.xml          # SEO sitemap
+├── src/
+│   ├── components/          # Reusable UI components
+│   │   ├── ActivityCard.jsx
+│   │   ├── Button.jsx
+│   │   ├── Container.jsx
+│   │   ├── InfoCard.jsx
+│   │   ├── ProjectCard.jsx
+│   │   ├── SectionTitle.jsx
+│   │   ├── SkillCard.jsx
+│   │   ├── SocialIcon.jsx
+│   │   └── TimelineItem.jsx
+│   ├── sections/            # Page sections
+│   │   ├── About.jsx
+│   │   ├── Activities.jsx
+│   │   ├── Contact.jsx
+│   │   ├── Education.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Hero.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── Projects.jsx
+│   │   └── Skills.jsx
+│   ├── hooks/               # Custom React hooks
+│   │   ├── useScrollPosition.js
+│   │   └── useTypingEffect.js
+│   ├── data/
+│   │   └── portfolio.js     # All portfolio content (edit this!)
+│   ├── App.jsx              # Main app component
+│   ├── main.jsx             # React entry point
+│   └── index.css            # Global styles & Tailwind theme
+├── index.html               # Vite entry HTML
+├── vite.config.js           # Vite configuration
+├── tailwind.config.js       # (legacy — theme now in CSS)
+├── vercel.json              # Vercel deployment config
+├── package.json
+├── eslint.config.js
+├── .prettierrc
+└── README.md
 ```
 
 ## Installation
-
-To clone and set up the project locally:
 
 ```bash
 git clone https://github.com/tanjim041/Portfolio.git
@@ -86,61 +102,76 @@ cd Portfolio
 npm install
 ```
 
-## Local Development
+## Development
 
-The project uses a custom Node script to compile EJS templates and JSON data into a static HTML file.
-
-To start local development with hot-reloading for Tailwind CSS:
+Start the development server with hot module replacement:
 
 ```bash
 npm run dev
 ```
 
-You can then serve the root directory using an extension like Live Server in VS Code, or by running:
+The site will be available at `http://localhost:5173`.
+
+## Build
+
+Create a production build:
 
 ```bash
-npx serve .
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
 ```
 
 ## Deployment
 
-The project is hosted as a static site on GitHub Pages. Pushing changes to the `main` branch automatically updates the deployed site. 
+### Vercel (Recommended)
 
-Before pushing, ensure you build the final static assets:
+1. Push your code to GitHub
+2. Import the repository on [vercel.com](https://vercel.com)
+3. Vercel auto-detects Vite — no configuration needed
+4. Set environment variable `VITE_WEB3FORMS_KEY` with your Web3Forms access key
+5. Deploy!
+
+Every push to `main` will trigger automatic redeployment.
+
+### Manual
 
 ```bash
 npm run build
-git add .
-git commit -m "Update portfolio"
-git push origin main
+# Upload the `dist/` directory to any static hosting
 ```
 
 ## Customization
 
-You can update the portfolio content without editing HTML:
-- **Update Content:** Edit `data/portfolio.json`.
-- **Change Images:** Place new images in `public/images/` and update paths in the JSON.
-- **Update CV:** Replace `public/cv/Tanjim_CV.pdf` with your updated resume.
-- **Update Colors:** Modify the theme block in `tailwind.config.js`.
-- **Contact Form:** Update the hidden `access_key` input in `views/partials/contact.ejs` with your own Web3Forms key.
+All portfolio content is driven by **`src/data/portfolio.js`**. You never need to edit JSX to update:
 
-## Future Improvements
+- **Personal info** — name, subtitle, about, university, location, email
+- **Education** — institutions, degrees, scores, durations
+- **Skills** — hard skills and soft skills lists
+- **Projects** — title, description, tech stack, links, status
+- **Activities** — title, description, images
+- **Social links** — platform, URL, icon name
+- **Contact info** — address, phone, email
 
-- Add a markdown-based blog
-- Add project search and filtering
-- Improve accessibility and keyboard navigation
-- Add a dark/light mode toggle
-- Add more project screenshots
+### Other Customizations
+
+- **Images**: Place files in `public/images/` and reference them as `/images/filename.jpg`
+- **CV**: Replace `public/cv/Tanjim_CV.pdf` with your updated resume
+- **Colors**: Edit the `@theme` block in `src/index.css`
+- **Contact Form**: Set `VITE_WEB3FORMS_KEY` environment variable with your Web3Forms API key
 
 ## License
 
-© 2026 Md. Tanjimul Islam
-All Rights Reserved.
+© 2026 Md. Tanjimul Islam — All Rights Reserved.
 
 ## Author
 
-**Name:** Md. Tanjimul Islam  
-**University:** Ahsanullah University of Science and Technology  
-**Department:** Computer Science & Engineering  
-**GitHub:** [https://github.com/tanjim041](https://github.com/tanjim041)  
-**Portfolio:** [https://tanjim041.github.io/Portfolio/](https://tanjim041.github.io/Portfolio/)
+**Name:** Md. Tanjimul Islam
+**University:** Ahsanullah University of Science and Technology
+**Department:** Computer Science & Engineering
+**GitHub:** [https://github.com/tanjim041](https://github.com/tanjim041)
+**Portfolio:** [https://tanjim041.vercel.app](https://tanjim041.vercel.app)

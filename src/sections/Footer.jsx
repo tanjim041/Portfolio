@@ -1,0 +1,60 @@
+import { ArrowUp } from "lucide-react";
+import SocialIcon from "../components/SocialIcon";
+import useScrollPosition from "../hooks/useScrollPosition";
+import portfolioData from "../data/portfolio";
+
+export default function Footer() {
+  const { socials } = portfolioData;
+  const scrollY = useScrollPosition();
+  const showBackToTop = scrollY > 500;
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <footer className="bg-background border-t border-border py-12 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        {/* Logo */}
+        <div className="mb-6">
+          <a
+            href="#"
+            className="font-poppins font-bold text-2xl tracking-tighter text-text-main"
+          >
+            Tanjim&apos;s <span className="text-accent-primary">Portfolio</span>
+          </a>
+        </div>
+
+        {/* Socials */}
+        <div className="flex space-x-6 mb-8">
+          {socials.map((social) => (
+            <SocialIcon
+              key={social.platform}
+              platform={social.platform}
+              link={social.link}
+              icon={social.icon}
+              variant="circle"
+            />
+          ))}
+        </div>
+
+        {/* Copyright */}
+        <p className="text-text-muted text-sm text-center">
+          &copy; {new Date().getFullYear()} Md. Tanjimul Islam.
+          <br className="sm:hidden" /> All Rights Reserved.
+        </p>
+      </div>
+
+      {/* Back to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 w-12 h-12 bg-accent-primary text-background rounded-full shadow-lg flex items-center justify-center hover:bg-accent-secondary hover:-translate-y-2 hover-glow transition-all duration-300 z-50 ${
+          showBackToTop ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+        aria-label="Back to top"
+      >
+        <ArrowUp className="w-6 h-6" />
+      </button>
+    </footer>
+  );
+}
