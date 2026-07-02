@@ -10,7 +10,6 @@ const Education = lazy(() => import("./sections/Education"));
 const Skills = lazy(() => import("./sections/Skills"));
 const Projects = lazy(() => import("./sections/Projects"));
 const Activities = lazy(() => import("./sections/Activities"));
-const Contact = lazy(() => import("./sections/Contact"));
 
 function SectionFallback() {
   return (
@@ -33,7 +32,6 @@ export default function App() {
           <Skills />
           <Projects />
           <Activities />
-          <Contact />
         </Suspense>
       </main>
       <Footer />

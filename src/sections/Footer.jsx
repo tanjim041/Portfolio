@@ -1,4 +1,6 @@
 import { ArrowUp } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
 import SocialIcon from "../components/SocialIcon";
 import useScrollPosition from "../hooks/useScrollPosition";
 import portfolioData from "../data/portfolio";
@@ -26,7 +28,7 @@ export default function Footer() {
         </div>
 
         {/* Socials */}
-        <div className="flex space-x-6 mb-8">
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
           {socials.map((social) => (
             <SocialIcon
               key={social.platform}
@@ -36,6 +38,30 @@ export default function Footer() {
               variant="circle"
             />
           ))}
+
+          {/* Gmail */}
+          <a
+            href="mailto:islamtanjim316@gmail.com"
+            className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-text-muted hover:bg-accent-primary hover:text-background hover:border-accent-primary hover-glow transition-all duration-300"
+            aria-label="Send email via Gmail"
+            title="Email me"
+          >
+            <SiGmail className="w-5 h-5" />
+            <span className="sr-only">Gmail</span>
+          </a>
+
+          {/* WhatsApp */}
+          <a
+            href="https://wa.me/8801571270640"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-text-muted hover:bg-accent-primary hover:text-background hover:border-accent-primary hover-glow transition-all duration-300"
+            aria-label="Chat on WhatsApp"
+            title="WhatsApp me"
+          >
+            <FaWhatsapp className="w-5 h-5" />
+            <span className="sr-only">WhatsApp</span>
+          </a>
         </div>
 
         {/* Copyright */}

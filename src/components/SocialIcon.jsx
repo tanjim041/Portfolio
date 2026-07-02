@@ -1,5 +1,6 @@
 import { memo } from "react";
-import { FaGithub, FaLinkedinIn, FaFacebookF, FaInstagram, FaDiscord } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn, FaFacebookF, FaInstagram, FaDiscord, FaWhatsapp } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
 import { Mail } from "lucide-react";
 
 const iconMap = {
@@ -9,6 +10,8 @@ const iconMap = {
   instagram: FaInstagram,
   discord: FaDiscord,
   email: Mail,
+  gmail: SiGmail,
+  whatsapp: FaWhatsapp,
 };
 
 const SocialIcon = memo(function SocialIcon({
