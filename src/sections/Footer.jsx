@@ -15,20 +15,21 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-background border-t border-border py-12 relative overflow-hidden">
+    <footer
+      id="contact"
+      className="bg-background border-t border-border py-16 relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-        {/* Logo */}
-        <div className="mb-6">
-          <a
-            href="#"
-            className="font-poppins font-bold text-2xl tracking-tighter text-text-main"
-          >
-            Tanjim&apos;s <span className="text-accent-primary">Portfolio</span>
-          </a>
+        {/* Footer heading — matches section title typography */}
+        <div className="mb-10 text-center">
+          <h2 className="font-poppins text-3xl md:text-5xl font-bold text-text-main">
+            <span className="text-white">Let&apos;s </span>
+            <span className="text-accent-primary">Connect</span>
+          </h2>
         </div>
 
-        {/* Socials */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {/* Social Icons */}
+        <div className="flex flex-wrap justify-center gap-4 mb-10">
           {socials.map((social) => (
             <SocialIcon
               key={social.platform}

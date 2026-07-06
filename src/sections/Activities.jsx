@@ -16,7 +16,7 @@ export default function Activities() {
           lineColor="from-accent-secondary"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {activities.map((activity, index) => (
             <ActivityCard key={activity.title} activity={activity} index={index} />
           ))}

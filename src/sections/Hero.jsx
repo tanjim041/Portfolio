@@ -132,7 +132,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.6 }}
         >
           <a
-            href="/cv/Tanjim_CV.pdf"
+            href="/cv/Tanjim's Resume.pdf"
             download
             className="px-8 py-3 bg-accent-primary text-background font-semibold rounded-full hover:bg-accent-secondary hover-glow transition-all duration-300 flex items-center gap-2"
           >

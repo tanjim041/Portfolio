@@ -1,17 +1,12 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const ActivityCard = memo(function ActivityCard({ activity, index = 0 }) {
-  const { title, image, description } = activity;
+  const { title, image, description, link } = activity;
 
-  return (
-    <motion.div
-      className="bg-card border border-border rounded-xl overflow-hidden group hover:border-accent-secondary/50 transition-all duration-300"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
+  const CardContent = (
+    <>
       <div className="h-48 overflow-hidden relative">
         <div className="absolute inset-0 bg-background/60 group-hover:bg-background/20 transition-colors z-10 duration-300" />
         <img
@@ -32,9 +27,39 @@ const ActivityCard = memo(function ActivityCard({ activity, index = 0 }) {
         </div>
       </div>
 
-      <div className="p-5">
+      <div className="p-5 flex-1">
         <p className="text-text-muted text-sm leading-relaxed">{description}</p>
       </div>
+    </>
+  );
+
+  const containerClasses = "bg-card border border-border rounded-xl overflow-hidden group hover:border-accent-secondary/50 transition-all duration-300 flex flex-col h-full cursor-pointer";
+
+  if (link) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        className="h-full"
+      >
+        <Link to={link} className={containerClasses}>
+          {CardContent}
+        </Link>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div
+      className={containerClasses}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      {CardContent}
     </motion.div>
   );
 });

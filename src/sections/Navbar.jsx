@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import useScrollPosition from "../hooks/useScrollPosition";
 import portfolioData from "../data/portfolio";
@@ -21,6 +22,8 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const scrollY = useScrollPosition();
   const isScrolled = scrollY > 50;
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   const toggleMobile = useCallback(() => {
     setMobileOpen((prev) => !prev);
@@ -29,6 +32,12 @@ export default function Navbar() {
   const closeMobile = useCallback(() => {
     setMobileOpen(false);
   }, []);
+
+  // Helper to construct URLs based on current page
+  const getUrl = (href) => {
+    if (isHome) return href;
+    return `/${href}`;
+  };
 
   return (
     <nav
@@ -45,8 +54,8 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="font-poppins font-bold text-2xl tracking-tighter text-text-main group"
               aria-label={`${portfolioData.personal.name} Portfolio`}
             >
@@ -54,7 +63,7 @@ export default function Navbar() {
               <span className="text-accent-primary group-hover:text-glow transition-all duration-300">
                 Portfolio
               </span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Menu */}
@@ -62,7 +71,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <a
                 key={link.href + link.label}
-                href={link.href}
+                href={getUrl(link.href)}
                 className="nav-link text-sm font-medium text-text-main hover:text-accent-primary transition-colors"
               >
                 {link.label}
@@ -72,7 +81,7 @@ export default function Navbar() {
             {/* Education Dropdown */}
             <div className="relative group">
               <a
-                href="#education"
+                href={getUrl("#education")}
                 className="nav-link text-sm font-medium text-text-main hover:text-accent-primary transition-colors flex items-center gap-1"
               >
                 Education <ChevronDown className="w-4 h-4" />
@@ -81,7 +90,7 @@ export default function Navbar() {
                 {educationSubLinks.map((sub) => (
                   <a
                     key={sub.label}
-                    href={sub.href}
+                    href={getUrl(sub.href)}
                     className="block px-4 py-2 text-sm hover:bg-secondary hover:text-accent-primary transition-colors"
                   >
                     {sub.label}
@@ -91,7 +100,7 @@ export default function Navbar() {
             </div>
 
             <a
-              href="#contact"
+              href={getUrl("#contact")}
               className="px-5 py-2 bg-accent-primary/10 text-accent-primary border border-accent-primary/30 rounded-full text-sm font-medium hover:bg-accent-primary hover:text-background hover-glow transition-all duration-300"
             >
               Contact
@@ -131,7 +140,7 @@ export default function Navbar() {
           ].map((link) => (
             <a
               key={link.label}
-              href={link.href}
+              href={getUrl(link.href)}
               onClick={closeMobile}
               className="block px-3 py-2 rounded-md text-base font-medium hover:bg-card hover:text-accent-primary"
             >

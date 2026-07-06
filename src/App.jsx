@@ -1,7 +1,9 @@
 import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./sections/Navbar";
 import Hero from "./sections/Hero";
 import Footer from "./sections/Footer";
+import ScrollToTop from "./hooks/useScrollToTop";
 
 // Lazy-load sections below the fold for better initial load performance
 const About = lazy(() => import("./sections/About"));
@@ -11,6 +13,10 @@ const Skills = lazy(() => import("./sections/Skills"));
 const Projects = lazy(() => import("./sections/Projects"));
 const Activities = lazy(() => import("./sections/Activities"));
 
+// Lazy-load new games pages
+const GamesPage = lazy(() => import("./pages/GamesPage"));
+const GameDetailPage = lazy(() => import("./pages/GameDetailPage"));
+
 function SectionFallback() {
   return (
     <div className="py-24 flex items-center justify-center">
@@ -19,19 +25,34 @@ function SectionFallback() {
   );
 }
 
+function MainPortfolio() {
+  return (
+    <>
+      <Hero />
+      <Suspense fallback={<SectionFallback />}>
+        <About />
+        <Experience />
+        <Education />
+        <Skills />
+        <Projects />
+        <Activities />
+      </Suspense>
+    </>
+  );
+}
+
 export default function App() {
   return (
     <>
+      <ScrollToTop />
       <Navbar />
       <main>
-        <Hero />
         <Suspense fallback={<SectionFallback />}>
-          <About />
-          <Experience />
-          <Education />
-          <Skills />
-          <Projects />
-          <Activities />
+          <Routes>
+            <Route path="/" element={<MainPortfolio />} />
+            <Route path="/games" element={<GamesPage />} />
+            <Route path="/games/:slug" element={<GameDetailPage />} />
+          </Routes>
         </Suspense>
       </main>
       <Footer />

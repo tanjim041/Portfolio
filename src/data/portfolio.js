@@ -1,20 +1,21 @@
 const portfolioData = {
   personal: {
     name: "Md. Tanjimul Islam",
-    subtitle: "Computer Science & Engineering Graduate",
+    subtitle: "Computer Science & Engineering Student",
     titles: [
       "Problem Solver",
       "Programmer",
-      "IT Operation Specialist",
+      "Gamer",
+      "Explorer",
       "Competitive Programmer",
       "Creative Thinker",
     ],
     about:
-      "To develop a strong foundation in computer science and engineering, enhance technical proficiency, and cultivate problem-solving skills through a combination of academic coursework, hands-on projects, and continuous self-learning. Additionally, aim to actively contribute to collaborative projects, participate in coding competitions, and stay updated with emerging technologies to prepare for a successful and impactful career in the field.",
+      "I am Md. Tanjimul Islam, a Computer Science & Engineering student at Ahsanullah University of Science and Technology (AUST). I am passionate about software development, competitive programming, problem solving, and learning modern technologies. I enjoy exploring new places, playing games, solving coding challenges, and continuously improving my technical skills. I believe in teamwork, creativity, discipline, and lifelong learning.",
     university: "AUST",
     department: "CSE",
-    location: "Mirpur-14, Dhaka-1206, Bangladesh",
-    email: "tanjim433@gmail.com",
+    location: "Dhaka-1206, Bangladesh",
+    email: "islamtanjim316@gmail.com",
     phone: "01571270640",
     interests: "Travelling, Learning New things, Coding",
     nationality: "Bangladeshi",
@@ -25,8 +26,8 @@ const portfolioData = {
     {
       institution: "Ahsanullah University of Science and Technology",
       degree: "BSc in Computer Science & Engineering",
-      score: "CGPA: 3.80",
-      duration: "2018–2022",
+      score: "CGPA: 3.3+",
+      duration: "2023-Present",
       image: "/images/aust.jpg",
       description:
         "Learned advanced concepts in software engineering, algorithms, and system design while participating in programming contests and various technical clubs.",
@@ -35,7 +36,7 @@ const portfolioData = {
       institution: "Adamjee Cantonment College",
       degree: "HSC",
       score: "GPA: 5.00",
-      duration: "2015–2017",
+      duration: "2022",
       image: "/images/adamjee-college.jpg",
       description:
         "Excelled in science subjects, participating in extracurricular activities and building a strong foundation in mathematics and physics.",
@@ -44,7 +45,7 @@ const portfolioData = {
       institution: "Adamjee Cantonment Public School",
       degree: "SSC",
       score: "GPA: 5.00",
-      duration: "2006–2016",
+      duration: "2020",
       image: "/images/adamjee-school.jpg",
       description:
         "Completed secondary education with excellent grades, active participation in debate and science fairs.",
@@ -53,13 +54,15 @@ const portfolioData = {
 
   experience: [
     {
-      role: "IT Operation Specialist",
-      company: "CSE Department, AUST",
-      duration: "Ongoing",
+      role: "Software Engineering Intern (Seeking Opportunities)",
+      company: "Open to Internship Opportunities",
+      duration: "Available",
       image: "/images/experience-it.jpg",
       description: [
-        "Maintaining Asset Register of all IIT equipment in IS workshop and Department.",
-        "Providing technical support to the remote engineers for ongoing projects."
+        "Currently seeking internship opportunities in Software Engineering, Full-Stack Development, Backend Development, AI, or Machine Learning.",
+        "Passionate about software development and eager to gain real-world industry experience through internships, collaborative projects, and open-source contributions.",
+        "Strong foundation in React, Node.js, Flutter, C#, Python, Java, C++, SQL, and modern software engineering practices.",
+        "Enjoy collaborating in team environments, solving challenging problems, and continuously learning new technologies.",
       ]
     }
   ],
@@ -88,36 +91,37 @@ const portfolioData = {
 
   projects: [
     {
-      title: "Portfolio Website",
-      image: "/images/project-portfolio.jpg",
-      description: "A modern, premium, fully responsive personal portfolio website.",
-      techStack: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
-      githubLink: "https://github.com/tanjim041/Portfolio",
-      liveLink: "#",
+      title: "BacheLORE",
+      image: "/images/project-bachelore.jpg",
+      description:
+        "Collaborated on a full-stack web platform built to simplify independent living for students and young professionals in Bangladesh. The platform combines shared-flat listings, maid hiring, a secondhand marketplace, expense tracking, and tuition search into one application. Contributed to frontend development and feature integration as part of a multi-person team, with the application deployed on Vercel.",
+      techStack: ["React", "JavaScript", "Node.js", "CSS"],
+      githubLink: "https://github.com/tanjim041/BacheLORE",
+      liveLink: null,
       status: "Completed",
-      date: "Oct 2023",
+      date: null,
     },
     {
-      title: "E-Commerce API",
-      image: "/images/project-ecommerce.jpg",
+      title: "AUSThir App",
+      image: "/images/project-austhir.jpg",
       description:
-        "A RESTful API built for a scalable e-commerce platform with robust authentication.",
-      techStack: ["Node.js", "Express", "MongoDB", "JWT"],
-      githubLink: "https://github.com",
-      liveLink: "#",
-      status: "In Progress",
-      date: "Nov 2023",
+        "Developed a cross-platform mobile application for the Software Development-II (SD-II) lab course. Worked collaboratively to design and implement the application's core features using Flutter, targeting Android, iOS, and desktop platforms.",
+      techStack: ["Flutter", "Dart", "C++"],
+      githubLink: "https://github.com/tanjim041/AUSThir-App",
+      liveLink: null,
+      status: "Completed",
+      date: null,
     },
     {
-      title: "Algorithm Visualizer",
-      image: "/images/project-algo.jpg",
+      title: "Smart Office Monitor",
+      image: "/images/project-smart-office.jpg",
       description:
-        "A web application that visualizes classic sorting and pathfinding algorithms.",
-      techStack: ["React", "CSS", "Vite"],
-      githubLink: "https://github.com",
-      liveLink: "#",
-      status: "Completed",
-      date: "Aug 2023",
+        "Built a real-time IoT office monitoring system as part of a four-member team during a national Techathon competition. Contributed to a live dashboard displaying room-by-room power usage, automated after-hours alerts, and usage analytics. Helped integrate a Discord bot that provides real-time status queries and proactive alert notifications.",
+      techStack: ["React", "Node.js", "Express", "Tailwind CSS", "Discord.js"],
+      githubLink: "https://github.com/sucksatcse/techathon-nationals-smart-office-monitor",
+      liveLink: null,
+      status: "Techathon Nationals",
+      date: null,
     },
   ],
 
@@ -129,16 +133,11 @@ const portfolioData = {
         "Regularly participate in codeforces and regional programming contests.",
     },
     {
-      title: "University Clubs",
-      image: "/images/activity-club.jpg",
+      title: "Games",
+      image: "/images/activity-games.jpg",
       description:
-        "Active member of the AUST CSE Society, organizing workshops and tech talks.",
-    },
-    {
-      title: "Hackathons",
-      image: "/images/activity-hackathon.jpg",
-      description:
-        "Participated in national level hackathons building innovative solutions under 24 hours.",
+        "A collection of the competitive and casual games I have played, including my gaming achievements, profiles, ranks, and statistics.",
+      link: "/games",
     },
   ],
 
@@ -163,7 +162,7 @@ const portfolioData = {
   contact: {
     address: "Mirpur-14\nDhaka-1206\nBangladesh",
     phone: "01571270640",
-    email: "tanjim433@gmail.com",
+    email: "islamtanjim316@gmail.com",
   },
 };
 
