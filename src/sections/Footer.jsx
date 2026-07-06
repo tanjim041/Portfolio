@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { ArrowUp } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaDiscord } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import SocialIcon from "../components/SocialIcon";
 import useScrollPosition from "../hooks/useScrollPosition";
@@ -9,9 +10,27 @@ export default function Footer() {
   const { socials } = portfolioData;
   const scrollY = useScrollPosition();
   const showBackToTop = scrollY > 500;
+  const [discordCopied, setDiscordCopied] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const copyDiscordUsername = async () => {
+    try {
+      await navigator.clipboard.writeText("tanjim433");
+      setDiscordCopied(true);
+      window.clearTimeout(copyDiscordUsername.timeoutId);
+      copyDiscordUsername.timeoutId = window.setTimeout(() => {
+        setDiscordCopied(false);
+      }, 2200);
+    } catch {
+      setDiscordCopied(true);
+      window.clearTimeout(copyDiscordUsername.timeoutId);
+      copyDiscordUsername.timeoutId = window.setTimeout(() => {
+        setDiscordCopied(false);
+      }, 2200);
+    }
   };
 
   return (
@@ -19,7 +38,7 @@ export default function Footer() {
       id="contact"
       className="bg-background border-t border-border py-16 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center relative">
         {/* Footer heading — matches section title typography */}
         <div className="mb-10 text-center">
           <h2 className="font-poppins text-3xl md:text-5xl font-bold text-text-main">
@@ -30,6 +49,17 @@ export default function Footer() {
 
         {/* Social Icons */}
         <div className="flex flex-wrap justify-center gap-4 mb-10">
+          <div
+            className={`absolute -top-14 left-1/2 -translate-x-1/2 rounded-full border border-accent-primary/30 bg-card px-4 py-2 text-xs font-medium text-accent-primary shadow-lg transition-all duration-300 ${
+              discordCopied
+                ? "opacity-100 visible translate-y-0"
+                : "pointer-events-none opacity-0 invisible translate-y-2"
+            }`}
+            role="status"
+            aria-live="polite"
+          >
+            Discord username copied! Add me: tanjim433
+          </div>
           {socials.map((social) => (
             <SocialIcon
               key={social.platform}
@@ -63,6 +93,18 @@ export default function Footer() {
             <FaWhatsapp className="w-5 h-5" />
             <span className="sr-only">WhatsApp</span>
           </a>
+
+          {/* Discord */}
+          <button
+            type="button"
+            onClick={copyDiscordUsername}
+            className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-text-muted hover:bg-accent-primary hover:text-background hover:border-accent-primary hover-glow transition-all duration-300"
+            aria-label="Discord Username"
+            title="Copy Discord username"
+          >
+            <FaDiscord className="w-5 h-5" />
+            <span className="sr-only">Discord</span>
+          </button>
         </div>
 
         {/* Copyright */}

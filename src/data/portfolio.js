@@ -28,7 +28,7 @@ const portfolioData = {
       degree: "BSc in Computer Science & Engineering",
       score: "CGPA: 3.3+",
       duration: "2023-Present",
-      image: "/images/aust.jpg",
+      image: "/images/AUST.jpeg",
       description:
         "Learned advanced concepts in software engineering, algorithms, and system design while participating in programming contests and various technical clubs.",
     },
@@ -134,7 +134,7 @@ const portfolioData = {
     },
     {
       title: "Games",
-      image: "/images/activity-games.jpg",
+      image: "/images/Games.jpg",
       description:
         "A collection of the competitive and casual games I have played, including my gaming achievements, profiles, ranks, and statistics.",
       link: "/games",
@@ -156,6 +156,11 @@ const portfolioData = {
       platform: "GitHub",
       link: "https://github.com/tanjim041",
       icon: "github",
+    },
+    {
+      platform: "Codeforces",
+      link: "https://codeforces.com/profile/tanjim999",
+      icon: "codeforces",
     },
   ],
 

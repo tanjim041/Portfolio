@@ -1,6 +1,13 @@
 import { memo } from "react";
-import { FaGithub, FaLinkedinIn, FaFacebookF, FaInstagram, FaDiscord, FaWhatsapp } from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
+import {
+  FaGithub,
+  FaLinkedinIn,
+  FaFacebookF,
+  FaInstagram,
+  FaDiscord,
+  FaWhatsapp,
+} from "react-icons/fa";
+import { SiGmail, SiCodeforces } from "react-icons/si";
 import { Mail } from "lucide-react";
 
 const iconMap = {
@@ -11,15 +18,11 @@ const iconMap = {
   discord: FaDiscord,
   email: Mail,
   gmail: SiGmail,
+  codeforces: SiCodeforces,
   whatsapp: FaWhatsapp,
 };
 
-const SocialIcon = memo(function SocialIcon({
-  platform,
-  link,
-  icon,
-  variant = "inline",
-}) {
+const SocialIcon = memo(function SocialIcon({ platform, link, icon, variant = "inline" }) {
   const IconComponent = iconMap[icon] || FaGithub;
 
   if (variant === "circle") {
