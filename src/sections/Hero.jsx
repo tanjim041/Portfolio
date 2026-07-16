@@ -1,9 +1,7 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, memo } from "react";
 import { motion } from "framer-motion";
 import { Download, Mail, ChevronsDown } from "lucide-react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
-import { useEffect, useState } from "react";
+import Particles from "@tsparticles/react";
 import useTypingEffect from "../hooks/useTypingEffect";
 import SocialIcon from "../components/SocialIcon";
 import portfolioData from "../data/portfolio";
@@ -47,18 +45,34 @@ const particlesOptions = {
   detectRetina: true,
 };
 
+// Isolated sub-component so the typing state updates never re-render
+// the parent Hero (and therefore never disturb the Particles canvas).
+const TypingText = memo(function TypingText({ titles }) {
+  const typedText = useTypingEffect(titles);
+  return (
+    <div className="inline-flex items-center text-xl md:text-2xl font-semibold text-accent-secondary">
+      <span className="mr-2">&gt;</span>
+      <span className="border-r-2 border-accent-secondary pr-1">{typedText}</span>
+    </div>
+  );
+});
+
+// Memoised Particles wrapper — prevents re-renders caused by parent state changes.
+const ParticlesBackground = memo(function ParticlesBackground({ options, onLoaded }) {
+  return (
+    <Particles
+      id="tsparticles"
+      particlesLoaded={onLoaded}
+      options={options}
+      className="absolute inset-0 z-0"
+    />
+  );
+});
+
 export default function Hero() {
   const { personal, socials } = portfolioData;
-  const typedText = useTypingEffect(personal.titles);
-  const [particlesReady, setParticlesReady] = useState(false);
 
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => setParticlesReady(true));
-  }, []);
-
-  const particlesLoaded = useCallback(async (container) => {
+  const particlesLoaded = useCallback(async () => {
     // Particles loaded successfully
   }, []);
 
@@ -70,15 +84,8 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
       aria-label="Hero section"
     >
-      {/* Particles Background */}
-      {particlesReady && (
-        <Particles
-          id="tsparticles"
-          particlesLoaded={particlesLoaded}
-          options={memoizedOptions}
-          className="absolute inset-0 z-0"
-        />
-      )}
+      {/* Particles Background — rendered once, never re-mounts */}
+      <ParticlesBackground options={memoizedOptions} onLoaded={particlesLoaded} />
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background pointer-events-none z-[1]" />
@@ -111,17 +118,14 @@ export default function Hero() {
           {personal.subtitle}
         </motion.h2>
 
-        {/* Typing Animation */}
+        {/* Typing Animation — isolated so only this tiny node re-renders */}
         <motion.div
           className="h-10 mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, delay: 0.4 }}
         >
-          <div className="inline-flex items-center text-xl md:text-2xl font-semibold text-accent-secondary">
-            <span className="mr-2">&gt;</span>
-            <span className="border-r-2 border-accent-secondary pr-1">{typedText}</span>
-          </div>
+          <TypingText titles={personal.titles} />
         </motion.div>
 
         {/* Action Buttons */}

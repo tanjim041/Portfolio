@@ -1,8 +1,7 @@
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useCallback, useMemo, memo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
+import Particles from "@tsparticles/react";
 import { Gamepad2, Award, ChevronRight, Heart, Zap } from "lucide-react";
 import Container from "../components/Container";
 import SectionTitle from "../components/SectionTitle";
@@ -48,15 +47,18 @@ const particlesOptions = {
   detectRetina: true,
 };
 
+const ParticlesBackground = memo(function ParticlesBackground({ options, onLoaded }) {
+  return (
+    <Particles
+      id="tsparticles-games"
+      particlesLoaded={onLoaded}
+      options={options}
+      className="absolute inset-0 z-0"
+    />
+  );
+});
+
 export default function GamesPage() {
-  const [particlesReady, setParticlesReady] = useState(false);
-
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => setParticlesReady(true));
-  }, []);
-
   const particlesLoaded = useCallback(async () => {}, []);
   const memoizedOptions = useMemo(() => particlesOptions, []);
 
@@ -66,15 +68,8 @@ export default function GamesPage() {
 
   return (
     <div className="bg-background min-h-screen text-text-main relative overflow-hidden">
-      {/* Particles Background */}
-      {particlesReady && (
-        <Particles
-          id="tsparticles-games"
-          particlesLoaded={particlesLoaded}
-          options={memoizedOptions}
-          className="absolute inset-0 z-0"
-        />
-      )}
+      {/* Particles Background — rendered once via global engine init in main.jsx */}
+      <ParticlesBackground options={memoizedOptions} onLoaded={particlesLoaded} />
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background pointer-events-none z-[1]" />
