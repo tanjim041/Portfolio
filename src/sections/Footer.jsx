@@ -35,22 +35,21 @@ export default function Footer() {
 
   return (
     <footer
-      id="contact"
+      id="footer"
       className="bg-background border-t border-border py-16 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center relative">
         {/* Footer heading — matches section title typography */}
         <div className="mb-10 text-center">
-          <h2 className="font-poppins text-3xl md:text-5xl font-bold text-text-main">
-            <span className="text-white">Let&apos;s </span>
-            <span className="text-accent-primary">Connect</span>
+          <h2 className="font-poppins text-3xl md:text-5xl font-black text-text-main uppercase tracking-tight">
+            Let&apos;s <span className="text-accent-primary">Connect</span>
           </h2>
         </div>
 
         {/* Social Icons */}
         <div className="flex flex-wrap justify-center gap-4 mb-10">
           <div
-            className={`absolute -top-14 left-1/2 -translate-x-1/2 rounded-full border border-accent-primary/30 bg-card px-4 py-2 text-xs font-medium text-accent-primary shadow-lg transition-all duration-300 ${
+            className={`absolute -top-14 left-1/2 -translate-x-1/2 rounded border border-accent-primary/30 bg-card px-4 py-2 font-mono text-[10px] text-accent-primary shadow-lg transition-all duration-300 ${
               discordCopied
                 ? "opacity-100 visible translate-y-0"
                 : "pointer-events-none opacity-0 invisible translate-y-2"
@@ -73,7 +72,7 @@ export default function Footer() {
           {/* Gmail */}
           <a
             href="mailto:islamtanjim316@gmail.com"
-            className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-text-muted hover:bg-accent-primary hover:text-background hover:border-accent-primary hover-glow transition-all duration-300"
+            className="w-10 h-10 rounded bg-card border border-border flex items-center justify-center text-text-muted hover:bg-accent-primary hover:text-background hover:border-accent-primary hover-glow transition-all duration-300"
             aria-label="Send email via Gmail"
             title="Email me"
           >
@@ -86,7 +85,7 @@ export default function Footer() {
             href="https://wa.me/8801571270640"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-text-muted hover:bg-accent-primary hover:text-background hover:border-accent-primary hover-glow transition-all duration-300"
+            className="w-10 h-10 rounded bg-card border border-border flex items-center justify-center text-text-muted hover:bg-accent-primary hover:text-background hover:border-accent-primary hover-glow transition-all duration-300"
             aria-label="Chat on WhatsApp"
             title="WhatsApp me"
           >
@@ -98,7 +97,7 @@ export default function Footer() {
           <button
             type="button"
             onClick={copyDiscordUsername}
-            className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-text-muted hover:bg-accent-primary hover:text-background hover:border-accent-primary hover-glow transition-all duration-300"
+            className="w-10 h-10 rounded bg-card border border-border flex items-center justify-center text-text-muted hover:bg-accent-primary hover:text-background hover:border-accent-primary hover-glow transition-all duration-300 cursor-pointer"
             aria-label="Discord Username"
             title="Copy Discord username"
           >
@@ -108,21 +107,20 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <p className="text-text-muted text-sm text-center">
-          &copy; {new Date().getFullYear()} Md. Tanjimul Islam.
-          <br className="sm:hidden" /> All Rights Reserved.
+        <p className="text-text-muted font-mono text-[10px] tracking-widest text-center uppercase">
+          &copy; {new Date().getFullYear()} Md. Tanjimul Islam. All Rights Reserved.
         </p>
       </div>
 
       {/* Back to Top Button */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 w-12 h-12 bg-accent-primary text-background rounded-full shadow-lg flex items-center justify-center hover:bg-accent-secondary hover:-translate-y-2 hover-glow transition-all duration-300 z-50 ${
+        className={`fixed bottom-8 right-8 w-10 h-10 bg-accent-primary text-background rounded shadow-lg flex items-center justify-center hover:bg-accent-secondary hover:-translate-y-1 hover-glow transition-all duration-300 z-50 cursor-pointer ${
           showBackToTop ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         aria-label="Back to top"
       >
-        <ArrowUp className="w-6 h-6" />
+        <ArrowUp className="w-5 h-5" />
       </button>
     </footer>
   );

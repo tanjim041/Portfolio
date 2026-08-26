@@ -21,7 +21,7 @@ const ActivityCard = memo(function ActivityCard({ activity, index = 0 }) {
         />
 
         <div className="absolute bottom-4 left-4 z-20">
-          <h3 className="font-poppins text-lg font-bold text-text-main group-hover:text-accent-secondary transition-colors">
+          <h3 className="font-poppins text-lg font-bold text-text-main group-hover:text-accent-primary transition-colors uppercase leading-none">
             {title}
           </h3>
         </div>
@@ -33,7 +33,7 @@ const ActivityCard = memo(function ActivityCard({ activity, index = 0 }) {
     </>
   );
 
-  const containerClasses = "bg-card border border-border rounded-xl overflow-hidden group hover:border-accent-secondary/50 transition-all duration-300 flex flex-col h-full cursor-pointer";
+  const containerClasses = "bg-card border border-border rounded overflow-hidden group hover:border-accent-primary/50 hover-glow transition-all duration-300 flex flex-col h-full cursor-pointer";
 
   if (link) {
     return (

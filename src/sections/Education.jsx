@@ -7,9 +7,9 @@ export default function Education() {
   const { education } = portfolioData;
 
   return (
-    <section id="education" className="py-24 relative" aria-label="Education">
+    <section id="education" className="py-32 lg:py-48 relative overflow-hidden" aria-label="Education">
       <Container maxWidth="max-w-4xl">
-        <SectionTitle prefix="My" accent="Education" />
+        <SectionTitle prefix="My" accent="Education" number="03" />
 
         <div className="relative wrap overflow-hidden h-full">
           {/* Timeline Vertical Line */}

@@ -10,9 +10,9 @@ export default function Experience() {
   if (!experience || experience.length === 0) return null;
 
   return (
-    <section id="experience" className="py-24 relative" aria-label="Experience">
+    <section id="experience" className="py-32 lg:py-48 relative overflow-hidden" aria-label="Experience">
       <Container maxWidth="max-w-4xl">
-        <SectionTitle prefix="Work" accent="Experience" />
+        <SectionTitle prefix="Work" accent="Experience" number="02" />
 
         <div className="space-y-12">
           {experience.map((exp, index) => {
@@ -20,7 +20,7 @@ export default function Experience() {
             return (
               <motion.div
                 key={exp.role + exp.company}
-                className="bg-card rounded-2xl border border-border p-8 hover:border-accent-primary/30 transition-all duration-300 relative overflow-hidden group"
+                className="bg-card rounded border border-border p-8 hover:border-accent-primary/50 hover-glow transition-all duration-300 relative overflow-hidden group"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -31,25 +31,25 @@ export default function Experience() {
 
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                   <div className="flex items-start gap-4">
-                    <div className="p-3 bg-accent-primary/10 text-accent-primary rounded-xl flex-shrink-0">
-                      <Briefcase className="w-6 h-6" />
+                    <div className="p-3 bg-accent-primary/10 text-accent-primary rounded flex-shrink-0">
+                      <Briefcase className="w-5 h-5" />
                     </div>
                     <div>
                       <h3 className="text-xl font-poppins font-bold text-text-main group-hover:text-accent-primary transition-colors duration-300">
                         {exp.role}
                       </h3>
-                      <p className="text-text-muted font-medium mt-1">{exp.company}</p>
+                      <p className="text-text-muted font-mono text-sm tracking-wide mt-1">{exp.company}</p>
                     </div>
                   </div>
 
                   <div className="flex-shrink-0">
                     {isAvailable ? (
-                      <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-accent-primary/15 text-accent-primary border border-accent-primary/40 rounded-full text-xs font-semibold tracking-wider uppercase">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent-primary/15 text-accent-primary border border-accent-primary/30 rounded font-mono text-[10px] font-bold tracking-wider uppercase">
                         <span className="w-1.5 h-1.5 rounded-full bg-accent-primary animate-pulse" />
                         Available
                       </span>
                     ) : (
-                      <span className="inline-block px-4 py-1.5 bg-secondary text-accent-secondary border border-border rounded-full text-xs font-semibold tracking-wider uppercase">
+                      <span className="inline-block px-3 py-1 bg-secondary text-accent-primary border border-border rounded font-mono text-[10px] font-bold tracking-wider uppercase">
                         {exp.duration}
                       </span>
                     )}
@@ -67,9 +67,9 @@ export default function Experience() {
 
                 {/* CTA note for internship card */}
                 {isAvailable && (
-                  <div className="mt-6 flex items-start gap-3 p-4 rounded-xl bg-accent-primary/5 border border-accent-primary/20">
+                  <div className="mt-6 flex items-start gap-3 p-4 rounded bg-accent-primary/5 border border-accent-primary/20">
                     <Sparkles className="w-4 h-4 text-accent-primary flex-shrink-0 mt-0.5" />
-                    <p className="text-accent-primary text-sm leading-relaxed">
+                    <p className="text-accent-primary font-mono text-xs leading-relaxed">
                       Actively looking for internship opportunities. Feel free to contact me for collaboration or internship positions.
                     </p>
                   </div>

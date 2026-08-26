@@ -34,11 +34,11 @@ export default function About() {
   const cards = infoCards(personal);
 
   return (
-    <section id="about" className="py-24 bg-secondary" aria-label="About me">
+    <section id="about" className="py-32 lg:py-48 bg-secondary relative overflow-hidden" aria-label="About me">
       <Container>
-        <SectionTitle prefix="About" accent="Me" />
+        <SectionTitle prefix="About" accent="Me" number="01" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Left: Profile Image */}
           <motion.div
             className="lg:col-span-5"
@@ -48,15 +48,15 @@ export default function About() {
             transition={{ duration: 0.7 }}
           >
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-accent-primary to-accent-secondary rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
-              <div className="relative rounded-2xl overflow-hidden aspect-square border border-border bg-card">
+              <div className="absolute -inset-1 bg-gradient-to-r from-accent-primary to-accent-secondary rounded blur opacity-15 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+              <div className="relative rounded overflow-hidden aspect-square border border-border bg-card">
                 <img
                   src="/images/profile.jpg"
                   alt={`${personal.name} profile`}
                   className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
                   loading="lazy"
                   onError={(e) => {
-                    e.target.src = `https://ui-avatars.com/api/?name=Tanjimul+Islam&size=512&background=09090B&color=06B6D4`;
+                    e.target.src = `https://ui-avatars.com/api/?name=Tanjimul+Islam&size=512&background=1E1E22&color=FF7E47`;
                   }}
                 />
               </div>
@@ -71,11 +71,11 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <h3 className="text-2xl font-poppins font-semibold mb-6 text-text-main">
+            <h3 className="text-2xl md:text-3xl font-poppins font-bold mb-6 text-text-main">
               {personal.subtitle}
             </h3>
 
-            <p className="text-text-muted text-lg leading-relaxed mb-8">{personal.about}</p>
+            <p className="text-text-muted text-base md:text-lg leading-relaxed mb-8">{personal.about}</p>
 
             {/* Quick Info Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

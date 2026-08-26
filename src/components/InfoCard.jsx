@@ -4,19 +4,18 @@ import { motion } from "framer-motion";
 const InfoCard = memo(function InfoCard({ icon: Icon, label, value, href }) {
   const ValueTag = href ? "a" : "p";
   const valueProps = href
-    ? { href, className: "font-medium text-text-main hover:text-accent-primary" }
-    : { className: "font-medium text-text-main" };
+    ? { href, className: "font-mono text-xs font-semibold tracking-wide text-text-main hover:text-accent-primary break-all transition-colors" }
+    : { className: "font-mono text-xs font-semibold tracking-wide text-text-main" };
 
   return (
     <motion.div
-      className="bg-card p-4 rounded-xl border border-border flex items-start gap-4 hover:border-accent-primary/30 transition-colors"
-      whileHover={{ borderColor: "rgba(6, 182, 212, 0.3)" }}
+      className="bg-card p-4 rounded border border-border flex items-start gap-4 hover:border-accent-primary/50 hover-glow transition-all duration-300"
     >
-      <div className="p-2 bg-accent-primary/10 text-accent-primary rounded-lg">
-        <Icon className="w-6 h-6" />
+      <div className="p-2 bg-accent-primary/10 text-accent-primary rounded">
+        <Icon className="w-5 h-5" />
       </div>
-      <div>
-        <p className="text-sm text-text-muted">{label}</p>
+      <div className="min-w-0">
+        <p className="font-mono text-[10px] tracking-wider uppercase text-text-muted mb-1">{label}</p>
         <ValueTag {...valueProps}>{value}</ValueTag>
       </div>
     </motion.div>

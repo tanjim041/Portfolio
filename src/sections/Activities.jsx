@@ -7,13 +7,12 @@ export default function Activities() {
   const { activities } = portfolioData;
 
   return (
-    <section id="activities" className="py-24 bg-secondary" aria-label="Extracurricular activities">
+    <section id="activities" className="py-32 lg:py-48 bg-secondary relative overflow-hidden" aria-label="Extracurricular activities">
       <Container>
         <SectionTitle
           prefix="Extracurricular"
           accent="Activities"
-          accentColor="text-accent-secondary"
-          lineColor="from-accent-secondary"
+          number="07"
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">

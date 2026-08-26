@@ -123,6 +123,18 @@ const portfolioData = {
       status: "Techathon Nationals",
       date: null,
     },
+    {
+      title: "Interactive Sorting Visualizer",
+      image: "/images/project-sorting-visualizer.jpg",
+      description:
+        "An interactive algorithm tool demonstrating Bubble Sort and Quick Sort algorithms. Built to visualize comparisons, swaps, and sorted divisions in real-time, designed around system typography and theme palettes.",
+      techStack: ["React", "JavaScript", "Tailwind CSS", "Algorithms"],
+      githubLink: "https://github.com/tanjim041/Portfolio",
+      liveLink: "#projects",
+      status: "Interactive Tool",
+      date: "Aug 2026",
+      isVisualizer: true,
+    },
   ],
 
   activities: [

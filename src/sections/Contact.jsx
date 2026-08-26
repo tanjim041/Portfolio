@@ -74,14 +74,14 @@ export default function Contact() {
   ];
 
   const inputClasses =
-    "w-full bg-secondary border border-border rounded-lg px-4 py-3 text-text-main focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-colors";
+    "w-full bg-background border border-border rounded px-4 py-3 text-text-main font-mono text-xs focus:outline-none focus:border-accent-primary transition-all duration-300";
 
   return (
-    <section id="contact" className="py-24 bg-secondary" aria-label="Contact">
+    <section id="contact" className="py-32 lg:py-48 bg-secondary relative overflow-hidden" aria-label="Contact">
       <Container>
-        <SectionTitle prefix="Get In" accent="Touch" />
+        <SectionTitle prefix="Get In" accent="Touch" number="08" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Contact Info & Map */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -89,10 +89,10 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <h3 className="text-2xl font-poppins font-semibold mb-6 text-text-main">
+            <h3 className="text-2xl md:text-3xl font-poppins font-bold mb-6 text-text-main">
               Let&apos;s Connect
             </h3>
-            <p className="text-text-muted mb-8">
+            <p className="text-text-muted mb-8 leading-relaxed">
               I&apos;m currently open to new opportunities. Whether you have a question or just want
               to say hi, I&apos;ll try my best to get back to you!
             </p>
@@ -100,21 +100,21 @@ export default function Contact() {
             <div className="space-y-6 mb-8">
               {contactInfo.map((info) => (
                 <div key={info.title} className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-accent-primary flex-shrink-0">
-                    <info.icon className="w-6 h-6" />
+                  <div className="w-10 h-10 rounded bg-card border border-border flex items-center justify-center text-accent-primary flex-shrink-0">
+                    <info.icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-medium text-text-main">{info.title}</h4>
+                    <h4 className="font-mono text-xs font-bold tracking-wider uppercase text-text-main mb-1">{info.title}</h4>
                     {info.href ? (
                       <a
                         href={info.href}
-                        className="text-text-muted hover:text-accent-primary transition-colors"
+                        className="text-sm text-text-muted hover:text-accent-primary transition-colors"
                       >
                         {info.content}
                       </a>
                     ) : (
                       <p
-                        className={`text-text-muted ${info.isPreformatted ? "whitespace-pre-line" : ""}`}
+                        className={`text-sm text-text-muted ${info.isPreformatted ? "whitespace-pre-line" : ""}`}
                       >
                         {info.content}
                       </p>
@@ -125,14 +125,14 @@ export default function Contact() {
             </div>
 
             {/* Google Maps */}
-            <div className="h-64 w-full rounded-xl overflow-hidden border border-border">
+            <div className="h-64 w-full rounded overflow-hidden border border-border">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14601.769062638848!2d90.3752538965682!3d23.802874136814757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c72c231751d3%3A0xc48c0356cbb45db0!2sMirpur-14%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd"
                 width="100%"
                 height="100%"
                 style={{
                   border: 0,
-                  filter: "grayscale(100%) invert(92%) contrast(83%)",
+                  filter: "grayscale(100%) opacity(0.85) contrast(1.05)",
                 }}
                 allowFullScreen
                 loading="lazy"
@@ -149,7 +149,7 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <div className="bg-card border border-border rounded-2xl p-8 shadow-xl">
+            <div className="bg-card border border-border rounded p-6 md:p-8 shadow-lg animate-fade-in">
               <form
                 id="contactForm"
                 onSubmit={handleSubmit(onSubmit)}
@@ -159,7 +159,7 @@ export default function Contact() {
                 {/* Form Status Message */}
                 {formStatus.message && (
                   <div
-                    className={`rounded-lg p-4 text-sm font-medium border ${
+                    className={`rounded p-4 text-xs font-mono border ${
                       formStatus.type === "success"
                         ? "bg-green-500/10 text-green-500 border-green-500/20"
                         : "bg-red-500/10 text-red-500 border-red-500/20"
@@ -173,7 +173,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="contact-name"
-                    className="block text-sm font-medium text-text-muted mb-2"
+                    className="block font-mono text-[10px] tracking-wider uppercase text-text-muted mb-2"
                   >
                     Your Name
                   </label>
@@ -186,14 +186,14 @@ export default function Contact() {
                     {...register("name", { required: "Name is required" })}
                   />
                   {errors.name && (
-                    <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>
+                    <p className="mt-1 text-xs text-red-500 font-mono">{errors.name.message}</p>
                   )}
                 </div>
 
                 <div>
                   <label
                     htmlFor="contact-email"
-                    className="block text-sm font-medium text-text-muted mb-2"
+                    className="block font-mono text-[10px] tracking-wider uppercase text-text-muted mb-2"
                   >
                     Your Email
                   </label>
@@ -212,14 +212,14 @@ export default function Contact() {
                     })}
                   />
                   {errors.email && (
-                    <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
+                    <p className="mt-1 text-xs text-red-500 font-mono">{errors.email.message}</p>
                   )}
                 </div>
 
                 <div>
                   <label
                     htmlFor="contact-subject"
-                    className="block text-sm font-medium text-text-muted mb-2"
+                    className="block font-mono text-[10px] tracking-wider uppercase text-text-muted mb-2"
                   >
                     Subject
                   </label>
@@ -232,14 +232,14 @@ export default function Contact() {
                     {...register("subject", { required: "Subject is required" })}
                   />
                   {errors.subject && (
-                    <p className="mt-1 text-xs text-red-500">{errors.subject.message}</p>
+                    <p className="mt-1 text-xs text-red-500 font-mono">{errors.subject.message}</p>
                   )}
                 </div>
 
                 <div>
                   <label
                     htmlFor="contact-message"
-                    className="block text-sm font-medium text-text-muted mb-2"
+                    className="block font-mono text-[10px] tracking-wider uppercase text-text-muted mb-2"
                   >
                     Message
                   </label>
@@ -252,14 +252,14 @@ export default function Contact() {
                     {...register("message", { required: "Message is required" })}
                   />
                   {errors.message && (
-                    <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>
+                    <p className="mt-1 text-xs text-red-500 font-mono">{errors.message.message}</p>
                   )}
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full bg-accent-primary text-background font-bold rounded-lg px-4 py-3 hover:bg-accent-secondary hover-glow transition-all duration-300 flex items-center justify-center gap-2 ${
+                  className={`w-full bg-accent-primary text-background font-mono text-xs uppercase tracking-widest font-bold rounded px-4 py-3.5 hover:bg-accent-secondary hover-glow transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
                     isSubmitting ? "opacity-75 cursor-not-allowed" : ""
                   }`}
                 >
