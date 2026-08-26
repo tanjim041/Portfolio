@@ -60,10 +60,6 @@ export default function CodeforcesStats() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isDark, setIsDark] = useState(true);
 
-  // GitHub contribution state
-  const [githubError, setGithubError] = useState(false);
-  const [githubLoading, setGithubLoading] = useState(true);
-
   // Track theme to update Recharts accent color and calendar scheme dynamically
   useEffect(() => {
     const checkTheme = () => {
@@ -121,19 +117,7 @@ export default function CodeforcesStats() {
     fetchCFData();
   }, []);
 
-  // Check GitHub connectivity to verify loading and fallback states
-  useEffect(() => {
-    fetch(`https://github-contributions.vercel.app/api/v1/${githubUsername}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to load GitHub calendar");
-        setGithubLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setGithubError(true);
-        setGithubLoading(false);
-      });
-  }, []);
+
 
   // Format date ticks for X-Axis
   const formatXAxis = (tickItem) => {
@@ -328,35 +312,33 @@ export default function CodeforcesStats() {
               </a>
             </div>
 
-            {githubLoading ? (
-              <HeatmapSkeleton />
-            ) : githubError ? (
-              <div className="text-center py-8 flex flex-col items-center justify-center">
-                <AlertTriangle className="w-8 h-8 text-accent-primary mb-3 animate-bounce" />
-                <p className="font-mono text-[10px] text-text-muted uppercase tracking-widest mb-4">
-                  Heatmap stats offline — check profile directly
-                </p>
-                <a
-                  href={`https://github.com/${githubUsername}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-accent-primary/10 text-accent-primary border border-accent-primary/30 rounded text-[10px] font-mono tracking-widest uppercase hover:bg-accent-primary hover:text-background hover-glow transition-all duration-300"
-                >
-                  Open GitHub
-                </a>
-              </div>
-            ) : (
-              <div className="w-full overflow-x-auto flex justify-center py-2 text-text-main font-mono text-[10px]">
-                <GitHubCalendar
-                  username={githubUsername}
-                  theme={calendarTheme}
-                  colorScheme={isDark ? "dark" : "light"}
-                  labels={{
-                    totalCount: "{{count}} contributions in the last year",
-                  }}
-                />
-              </div>
-            )}
+            <div className="w-full overflow-x-auto flex justify-center py-2 text-text-main font-mono text-[10px]">
+              <GitHubCalendar
+                username={githubUsername}
+                theme={calendarTheme}
+                colorScheme={isDark ? "dark" : "light"}
+                renderLoading={() => <HeatmapSkeleton />}
+                renderError={() => (
+                  <div className="text-center py-8 flex flex-col items-center justify-center">
+                    <AlertTriangle className="w-8 h-8 text-accent-primary mb-3" />
+                    <p className="font-mono text-[10px] text-text-muted uppercase tracking-widest mb-4">
+                      Heatmap stats offline — check profile directly
+                    </p>
+                    <a
+                      href={`https://github.com/${githubUsername}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-accent-primary/10 text-accent-primary border border-accent-primary/30 rounded text-[10px] font-mono tracking-widest uppercase hover:bg-accent-primary hover:text-background hover-glow transition-all duration-300"
+                    >
+                      Open GitHub
+                    </a>
+                  </div>
+                )}
+                labels={{
+                  totalCount: "{{count}} contributions in the last year",
+                }}
+              />
+            </div>
           </div>
         </div>
       </Container>
