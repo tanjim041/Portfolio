@@ -1,5 +1,5 @@
-import { memo, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { memo } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Container from "../components/Container";
 import { skillCategories } from "../data/skills";
 
@@ -10,28 +10,25 @@ const radialMetrics = [
   { label: "OOP & Design", percent: 88, detail: "System abstractions", value: "88%" },
 ];
 
+/* ─── RadialMetric ───────────────────────────────────────────────── */
 const RadialMetric = memo(function RadialMetric({ metric }) {
   const { label, percent, detail, value } = metric;
   const radius = 35;
   const circumference = 2 * Math.PI * radius;
-  
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-  }, []);
+  const shouldReduceMotion = useReducedMotion();
+  const offset = circumference - (percent / 100) * circumference;
 
   return (
     <motion.div
       className="bg-card border border-border rounded p-6 flex flex-col items-center justify-center text-center hover:border-accent-primary/50 hover-glow transition-all duration-300 relative group"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: shouldReduceMotion ? 0.3 : 0.5 }}
     >
       <div className="relative w-20 h-20 mb-4 flex items-center justify-center">
         {/* Background track circle */}
-        <svg className="w-full h-full transform -rotate-90">
+        <svg className="w-full h-full transform -rotate-90" aria-hidden="true">
           <circle
             cx="40"
             cy="40"
@@ -49,22 +46,22 @@ const RadialMetric = memo(function RadialMetric({ metric }) {
             strokeWidth="4"
             fill="transparent"
             strokeDasharray={circumference}
-            initial={{ strokeDashoffset: prefersReducedMotion ? circumference - (percent / 100) * circumference : circumference }}
-            whileInView={{ strokeDashoffset: circumference - (percent / 100) * circumference }}
+            initial={{ strokeDashoffset: circumference }}
+            whileInView={{ strokeDashoffset: offset }}
             viewport={{ once: true }}
-            transition={{ duration: prefersReducedMotion ? 0 : 1.2, ease: "easeOut", delay: 0.15 }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 1.2,
+              ease: "easeOut",
+              delay: shouldReduceMotion ? 0 : 0.15,
+            }}
           />
         </svg>
-        <span className="absolute font-mono text-xs font-bold text-text-main">
-          {value}
-        </span>
+        <span className="absolute font-mono text-xs font-bold text-text-main">{value}</span>
       </div>
       <h4 className="font-poppins text-xs font-bold text-text-main uppercase tracking-wider mb-1">
         {label}
       </h4>
-      <p className="font-mono text-[9px] text-text-muted uppercase tracking-widest">
-        {detail}
-      </p>
+      <p className="font-mono text-[9px] text-text-muted uppercase tracking-widest">{detail}</p>
     </motion.div>
   );
 });
@@ -75,18 +72,21 @@ const pillContainer = {
   visible: { transition: { staggerChildren: 0.045 } },
 };
 
-const pillItem = {
-  hidden: { opacity: 0, y: 10, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.3, ease: "easeOut" },
-  },
-};
+/* pillItem: reduced-motion variant inlined via variants factory */
+function makePillItem(shouldReduceMotion) {
+  return {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 10, scale: shouldReduceMotion ? 1 : 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: shouldReduceMotion ? 0.2 : 0.3, ease: "easeOut" },
+    },
+  };
+}
 
 /* ─── SkillPill ──────────────────────────────────────────────────── */
-const SkillPill = memo(function SkillPill({ skill, isLearning }) {
+const SkillPill = memo(function SkillPill({ skill, isLearning, pillItem }) {
   const { name, Icon, color } = skill;
 
   return (
@@ -133,6 +133,8 @@ const SkillPill = memo(function SkillPill({ skill, isLearning }) {
 /* ─── SkillCategory ──────────────────────────────────────────────── */
 const SkillCategory = memo(function SkillCategory({ category, index }) {
   const num = String(index + 1).padStart(2, "0");
+  const shouldReduceMotion = useReducedMotion();
+  const pillItem = makePillItem(shouldReduceMotion);
 
   return (
     <motion.div
@@ -143,10 +145,10 @@ const SkillCategory = memo(function SkillCategory({ category, index }) {
         border-b border-border/30
         last:border-b-0
       "
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.55, delay: index * 0.05, ease: "easeOut" }}
+      transition={{ duration: shouldReduceMotion ? 0.3 : 0.55, delay: shouldReduceMotion ? 0 : index * 0.05, ease: "easeOut" }}
     >
       {/* LEFT — category meta */}
       <div className="flex flex-col justify-start pt-0.5">
@@ -191,6 +193,7 @@ const SkillCategory = memo(function SkillCategory({ category, index }) {
             key={skill.name}
             skill={skill}
             isLearning={category.isLearning}
+            pillItem={pillItem}
           />
         ))}
       </motion.div>
@@ -200,6 +203,8 @@ const SkillCategory = memo(function SkillCategory({ category, index }) {
 
 /* ─── Skills (main section) ──────────────────────────────────────── */
 export default function Skills() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="skills"
@@ -229,10 +234,10 @@ export default function Skills() {
         {/* ── section header ── */}
         <motion.header
           className="mb-20 lg:mb-28"
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          transition={{ duration: shouldReduceMotion ? 0.3 : 0.7, ease: "easeOut" }}
         >
           {/* eyebrow label */}
           <p className="flex items-center gap-3 text-accent-primary font-mono text-xs uppercase tracking-widest mb-6">

@@ -1,59 +1,97 @@
 import { memo } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
-const TimelineItem = memo(function TimelineItem({ item, index, total }) {
-  const isEven = index % 2 === 0;
-  const number = total - index;
+/**
+ * TimelineItem — single-column left-rail layout.
+ *
+ * Visual structure:
+ *   [dot on line] — [card slides in from right]
+ *
+ * Works for both Education and Experience timeline sections.
+ */
+const TimelineItem = memo(function TimelineItem({ item, index }) {
+  const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div
-      className={`mb-12 flex justify-between items-center w-full ${isEven ? "flex-row-reverse left-timeline" : "right-timeline"}`}
+    <motion.div
+      className="relative pl-10 sm:pl-14"
+      initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 32 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{
+        duration: shouldReduceMotion ? 0.3 : 0.55,
+        delay: shouldReduceMotion ? 0 : index * 0.12,
+        ease: "easeOut",
+      }}
     >
-      <div className="order-1 w-5/12" />
-
-      {/* Timeline Circle (Rotated Diamond) */}
-      <div className="z-20 flex items-center justify-center order-1 bg-background w-8 h-8 rotate-45 border-2 border-accent-primary flex-shrink-0 shadow-lg">
-        <span className="font-mono text-xs font-bold text-text-main -rotate-45">{number}</span>
-      </div>
+      {/* Timeline dot — sits on the left rail line */}
+      <div
+        className="
+          absolute left-0 top-6
+          w-4 h-4 rounded-full
+          bg-background border-2 border-accent-primary
+          ring-4 ring-accent-primary/10
+          flex-shrink-0
+          z-10
+        "
+        aria-hidden="true"
+      />
 
       {/* Card */}
-      <motion.div
-        className="order-1 bg-card rounded shadow-xl w-5/12 px-6 py-6 border border-border hover:border-accent-primary/50 hover-glow transition-all duration-300 group"
-        initial={{ opacity: 0, x: isEven ? 50 : -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-      >
-        {/* Header with Institution Image */}
-        <div className="h-32 -mx-6 -mt-6 mb-6 rounded-t overflow-hidden relative">
-          <div className="absolute inset-0 bg-secondary/40 group-hover:bg-transparent transition-colors z-10" />
-          <img
-            src={item.image}
-            alt={item.institution}
-            className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
-            loading="lazy"
-            onError={(e) => {
-              e.target.src =
-                "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&h=300&fit=crop";
-            }}
-          />
-        </div>
+      <div className="bg-card rounded border border-border px-6 py-6 hover:border-accent-primary/50 hover-glow transition-all duration-300 group">
+        {/* Header row: image banner */}
+        {item.image && (
+          <div className="h-28 -mx-6 -mt-6 mb-5 rounded-t overflow-hidden relative">
+            <div className="absolute inset-0 bg-secondary/40 group-hover:bg-transparent transition-colors z-10" />
+            <img
+              src={item.image}
+              alt={item.institution ?? item.company}
+              className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
+              loading="lazy"
+              onError={(e) => {
+                e.target.src =
+                  "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&h=300&fit=crop";
+              }}
+            />
+          </div>
+        )}
 
+        {/* Meta row */}
         <div className="mb-3 flex items-center justify-between flex-wrap gap-2">
-          <span className="text-accent-primary font-mono text-xs font-semibold tracking-wide uppercase">
+          <span className="text-accent-primary font-mono text-[10px] font-bold tracking-wider uppercase">
             {item.duration}
           </span>
-          <span className="bg-secondary px-2.5 py-1 rounded font-mono text-[10px] text-text-main border border-border">
-            {item.score}
-          </span>
+          {item.score && (
+            <span className="bg-secondary px-2.5 py-1 rounded font-mono text-[10px] text-text-main border border-border">
+              {item.score}
+            </span>
+          )}
         </div>
 
-        <h3 className="font-poppins font-bold text-xl text-text-main mb-1 group-hover:text-accent-primary transition-colors duration-300">{item.degree}</h3>
-        <h4 className="text-text-muted font-mono text-xs mb-4">{item.institution}</h4>
+        {/* Title */}
+        <h3 className="font-poppins font-bold text-lg text-text-main mb-1 group-hover:text-accent-primary transition-colors duration-300">
+          {item.degree ?? item.role}
+        </h3>
 
-        <p className="text-sm leading-relaxed text-text-muted">{item.description}</p>
-      </motion.div>
-    </div>
+        {/* Subtitle */}
+        <h4 className="text-text-muted font-mono text-xs mb-4 tracking-wide">
+          {item.institution ?? item.company}
+        </h4>
+
+        {/* Description — string or array of bullets */}
+        {Array.isArray(item.description) ? (
+          <ul className="space-y-2 pl-4 list-disc text-text-muted text-sm leading-relaxed">
+            {item.description.map((bullet, i) => (
+              <li key={i} className="hover:text-text-main transition-colors duration-200">
+                {bullet}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm leading-relaxed text-text-muted">{item.description}</p>
+        )}
+      </div>
+    </motion.div>
   );
 });
 

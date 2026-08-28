@@ -143,6 +143,7 @@ const portfolioData = {
       image: "/images/activity-cp.jpg",
       description:
         "Regularly participate in codeforces and regional programming contests.",
+      tags: ["[CP]", "[CONTESTS]"],
     },
     {
       title: "Games",
@@ -150,8 +151,10 @@ const portfolioData = {
       description:
         "A collection of the competitive and casual games I have played, including my gaming achievements, profiles, ranks, and statistics.",
       link: "/games",
+      tags: ["[GAMING]", "[ESPORTS]"],
     },
   ],
+
 
   socials: [
     {

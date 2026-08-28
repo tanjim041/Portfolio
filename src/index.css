@@ -90,6 +90,18 @@
   }
 }
 
+@utility input-focus-glow {
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 3px var(--color-glow), 0 0 14px var(--color-glow);
+  }
+}
+
+@utility timeline-line-clip {
+  transform-origin: top center;
+}
+
 /* Base Styles */
 html {
   scroll-behavior: smooth;
