@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useReducedMotion, useInView } from "framer-motion";
 import { GraduationCap, MapPin, Mail, Heart } from "lucide-react";
 import Container from "../components/Container";
 import SectionTitle from "../components/SectionTitle";
@@ -58,6 +59,10 @@ export default function About() {
   const cards = infoCards(personal);
   const shouldReduceMotion = useReducedMotion();
 
+  // Ref for the profile image container — used to reveal color on scroll
+  const imageRef = useRef(null);
+  const imageInView = useInView(imageRef, { once: true, margin: "-80px" });
+
   const itemVariants = shouldReduceMotion ? cardItemReduced : cardItem;
 
   return (
@@ -96,13 +101,22 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: shouldReduceMotion ? 0.4 : 0.7, ease: "easeOut" }}
           >
-            <div className="relative group">
+            {/* ref here so useInView tracks when this image block enters viewport */}
+            <div className="relative group" ref={imageRef}>
               <div className="absolute -inset-1 bg-gradient-to-r from-accent-primary to-accent-secondary rounded blur opacity-15 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
               <div className="relative rounded overflow-hidden aspect-square border border-border bg-card">
                 <img
                   src="/images/profile.jpg"
                   alt={`${personal.name} profile`}
-                  className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                  className={[
+                    "w-full h-full object-cover filter transition-all",
+                    // Reveal color when in view (700ms); hover is still layered on top via CSS
+                    shouldReduceMotion || imageInView
+                      ? "grayscale-0 duration-700"
+                      : "grayscale duration-700",
+                    // Keep hover colour override working independently
+                    "group-hover:grayscale-0",
+                  ].join(" ")}
                   loading="lazy"
                   onError={(e) => {
                     e.target.src = `https://ui-avatars.com/api/?name=Tanjimul+Islam&size=512&background=1E1E22&color=FF7E47`;

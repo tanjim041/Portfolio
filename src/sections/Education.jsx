@@ -41,13 +41,21 @@ export default function Education() {
 
           {/* Education entries */}
           <div className="space-y-10">
-            {education.map((edu, index) => (
-              <TimelineItem
-                key={edu.institution}
-                item={edu}
-                index={index}
-              />
-            ))}
+            {education.map((edu, index) => {
+              let eduId = "";
+              if (index === 0) eduId = "university";
+              else if (index === 1) eduId = "college";
+              else if (index === 2) eduId = "school";
+
+              return (
+                <div key={edu.institution} id={eduId} className="scroll-mt-32">
+                  <TimelineItem
+                    item={edu}
+                    index={index}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </Container>

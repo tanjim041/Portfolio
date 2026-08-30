@@ -12,6 +12,12 @@ import { motion, useReducedMotion } from "framer-motion";
 const TimelineItem = memo(function TimelineItem({ item, index }) {
   const shouldReduceMotion = useReducedMotion();
 
+  // Dot appears slightly after the line reaches it:
+  // line draws in over ~1.2s; each card staggers at index * 0.12s.
+  // Dot delay mirrors the card delay + a small lead (0.15s) so it
+  // pops just before the card slides in — spatial consistency.
+  const dotDelay = shouldReduceMotion ? 0 : index * 0.12 + 0.15;
+
   return (
     <motion.div
       className="relative pl-10 sm:pl-14"
@@ -24,8 +30,8 @@ const TimelineItem = memo(function TimelineItem({ item, index }) {
         ease: "easeOut",
       }}
     >
-      {/* Timeline dot — sits on the left rail line */}
-      <div
+      {/* Timeline dot — pops in as the vertical line "reaches" it */}
+      <motion.div
         className="
           absolute left-0 top-6
           w-4 h-4 rounded-full
@@ -34,6 +40,14 @@ const TimelineItem = memo(function TimelineItem({ item, index }) {
           flex-shrink-0
           z-10
         "
+        initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.3 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{
+          duration: shouldReduceMotion ? 0 : 0.2,
+          delay: dotDelay,
+          ease: "easeOut",
+        }}
         aria-hidden="true"
       />
 

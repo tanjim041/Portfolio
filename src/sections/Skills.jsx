@@ -2,6 +2,7 @@ import { memo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Container from "../components/Container";
 import { skillCategories } from "../data/skills";
+import Marquee from "../components/Marquee";
 
 const radialMetrics = [
   { label: "Problem Solving", percent: 95, detail: "C++ / CF specialist", value: "95%" },
@@ -66,32 +67,12 @@ const RadialMetric = memo(function RadialMetric({ metric }) {
   );
 });
 
-/* ─── animation helpers ──────────────────────────────────────────── */
-const pillContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.045 } },
-};
-
-/* pillItem: reduced-motion variant inlined via variants factory */
-function makePillItem(shouldReduceMotion) {
-  return {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 10, scale: shouldReduceMotion ? 1 : 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: shouldReduceMotion ? 0.2 : 0.3, ease: "easeOut" },
-    },
-  };
-}
-
 /* ─── SkillPill ──────────────────────────────────────────────────── */
-const SkillPill = memo(function SkillPill({ skill, isLearning, pillItem }) {
+const SkillPill = memo(function SkillPill({ skill, isLearning }) {
   const { name, Icon, color } = skill;
 
   return (
-    <motion.div
-      variants={pillItem}
+    <div
       role="listitem"
       aria-label={name}
       className="
@@ -126,7 +107,7 @@ const SkillPill = memo(function SkillPill({ skill, isLearning, pillItem }) {
           aria-label="Currently learning"
         />
       )}
-    </motion.div>
+    </div>
   );
 });
 
@@ -134,7 +115,9 @@ const SkillPill = memo(function SkillPill({ skill, isLearning, pillItem }) {
 const SkillCategory = memo(function SkillCategory({ category, index }) {
   const num = String(index + 1).padStart(2, "0");
   const shouldReduceMotion = useReducedMotion();
-  const pillItem = makePillItem(shouldReduceMotion);
+  
+  // Calculate speed so that shorter lists move slightly slower to remain readable
+  const speed = Math.max(30, category.skills.length * 4);
 
   return (
     <motion.div
@@ -178,25 +161,19 @@ const SkillCategory = memo(function SkillCategory({ category, index }) {
         )}
       </div>
 
-      {/* RIGHT — skill pills */}
-      <motion.div
-        role="list"
-        aria-label={`${category.label} skills`}
-        className="flex flex-wrap gap-2.5 content-start"
-        variants={pillContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-      >
-        {category.skills.map((skill) => (
-          <SkillPill
-            key={skill.name}
-            skill={skill}
-            isLearning={category.isLearning}
-            pillItem={pillItem}
-          />
-        ))}
-      </motion.div>
+      {/* RIGHT — skill pills marquee */}
+      <div className="flex items-center min-w-0" role="list" aria-label={`${category.label} skills`}>
+        <Marquee
+          items={category.skills}
+          direction={index % 2 === 0 ? "right" : "left"}
+          prefersStaticFallback={true}
+          speed={speed}
+          innerClassName="flex items-center gap-2.5 shrink-0 px-[5px]"
+          renderItem={(skill) => (
+            <SkillPill skill={skill} isLearning={category.isLearning} />
+          )}
+        />
+      </div>
     </motion.div>
   );
 });

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./sections/Navbar";
@@ -6,6 +6,7 @@ import Hero from "./sections/Hero";
 import Footer from "./sections/Footer";
 import ScrollToTop from "./hooks/useScrollToTop";
 import Preloader from "./components/Preloader";
+import CustomCursor from "./components/CustomCursor";
 
 // Lazy-load sections below the fold for better initial load performance
 const About = lazy(() => import("./sections/About"));
@@ -28,7 +29,30 @@ function SectionFallback() {
   );
 }
 
+import { useLocation } from "react-router-dom";
+
 function MainPortfolio() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const targetId = location.hash.substring(1);
+      let attempts = 0;
+      
+      const tryScroll = () => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else if (attempts < 20) { // Try for up to 2 seconds
+          attempts++;
+          setTimeout(tryScroll, 100);
+        }
+      };
+      
+      tryScroll();
+    }
+  }, [location.hash]);
+
   return (
     <>
       <Hero />
@@ -46,12 +70,7 @@ function MainPortfolio() {
 }
 
 export default function App() {
-  const [showPreloader, setShowPreloader] = useState(() => {
-    if (typeof window !== "undefined") {
-      return !sessionStorage.getItem("hasSeenIntro");
-    }
-    return false;
-  });
+  const [showPreloader, setShowPreloader] = useState(true);
 
   return (
     <>
@@ -62,6 +81,7 @@ export default function App() {
           <Preloader onComplete={() => setShowPreloader(false)} />
         )}
       </AnimatePresence>
+      <CustomCursor />
       <Navbar />
       <main>
         <Suspense fallback={<SectionFallback />}>

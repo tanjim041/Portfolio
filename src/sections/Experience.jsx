@@ -49,9 +49,17 @@ export default function Experience() {
 
               return (
                 <div key={exp.role + exp.company} className="relative pl-10 sm:pl-14">
-                  {/* Timeline dot */}
-                  <div
+                  {/* Timeline dot — pops in as the vertical line "reaches" it */}
+                  <motion.div
                     className="absolute left-0 top-6 w-4 h-4 rounded-full bg-background border-2 border-accent-primary ring-4 ring-accent-primary/10 z-10"
+                    initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.3 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{
+                      duration: shouldReduceMotion ? 0 : 0.2,
+                      delay: shouldReduceMotion ? 0 : index * 0.12 + 0.15,
+                      ease: "easeOut",
+                    }}
                     aria-hidden="true"
                   />
 
