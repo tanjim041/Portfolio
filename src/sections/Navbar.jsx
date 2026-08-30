@@ -189,8 +189,8 @@ export default function Navbar() {
     borderRadius: "0px",
     backgroundColor: "transparent",
     boxShadow: "none",
-    paddingTop: "0px",
-    paddingBottom: "0px",
+    paddingTop: "16px",
+    paddingBottom: "16px",
     width: "100%",
   };
 
@@ -230,13 +230,13 @@ export default function Navbar() {
           */}
           {isScrolled && !isPill && (
             <div
-              className="absolute inset-0 bg-background/90 backdrop-blur-md shadow-md border-b border-border pointer-events-none"
+              className="absolute inset-0 bg-background/90 backdrop-blur-md shadow-md border-b border-border pointer-events-none -z-10"
               aria-hidden="true"
             />
           )}
 
           <div
-            className={`${
+            className={`relative z-10 ${
               isPill
                 ? // Pill state: tighter horizontal padding to suit the pill shape
                   "px-5 sm:px-6"
